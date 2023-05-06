@@ -1,0 +1,25 @@
+---
+- name: playbook2
+  hosts: [web_servers]
+  gather_facts: no
+  
+  become: yes
+  become_method: sudo
+  
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: latest
+
+    - name: Copy index.html
+      copy:
+        src: ./index.html
+        dest:  /var/www/html/index.html
+
+    - name: Restart Nginx service
+      shell: service nginx restart

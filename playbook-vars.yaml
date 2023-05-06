@@ -1,0 +1,23 @@
+---
+- name: playbook tags
+  hosts: [web_servers]
+  gather_facts: no
+  
+  become: yes
+  become_method: sudo
+  
+  vars:
+    package_name: nginx
+    package_version: latest
+
+  tasks:
+    - name: Update package cache
+      tags: update
+      apt:
+        update_cache: yes
+
+    - name: Install Nginx
+      tags: install, always
+      apt:
+        name: "{{package_name}}"
+        state: "{{package_version}}"

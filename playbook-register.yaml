@@ -1,0 +1,25 @@
+---
+- name: playbook tags
+  hosts: [web_servers]
+  
+  become: yes
+  become_method: sudo
+
+  tasks:
+    # - name: read index.html
+    #   command: cat /var/www/html/index.html
+    #   register: my_result
+
+    # - name: debug my_result register
+    #   debug:
+    #     var: my_result
+    
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: latest
+      register: package_result
+
+    - name: Restart Nginx
+      shell: service nginx restart
+      when: package_result.changed or not package_result.failed
