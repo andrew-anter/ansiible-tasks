@@ -1,0 +1,10 @@
+---
+- name: playbook tags
+  hosts: [web_servers]
+  gather_facts: no
+  
+  become: yes
+  become_method: sudo
+
+  roles:
+    - { role: web }
