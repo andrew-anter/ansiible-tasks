@@ -1,18 +1,15 @@
+---
 # tasks file for web
+
+- name: Uninstall nginx
+  apt:
+    name: "{{ package_name }}"
+    state: absent
+  
 
 - name: Install nginx
   apt:
     name: "{{ package_name }}"
     state: latest
-  register: package_result
-
-- name: Copy files to host server
-  copy:
-    src: "roles/web/files/{{ item }}"
-    dest: "~/files/{{ item }}"
-  loop: "{{ files }}"
-  when: package_result.changed 
-
-- name: Restart nginx service
-  shell: service nginx restart
-  when: package_result.changed 
+  
+  notify: Copy Files Handler

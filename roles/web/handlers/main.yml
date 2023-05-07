@@ -1,2 +1,12 @@
 ---
 # handlers file for web
+
+- name: Copy Files Handler
+  copy:
+    src: "roles/web/files/{{ item }}"
+    dest: "~/files/{{ item }}"
+  loop: "{{ files }}"
+  notify: Restart Nginx Handler
+
+- name: Restart Nginx Handler
+  shell: service nginx restart
