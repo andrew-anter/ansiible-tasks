@@ -1,6 +1,7 @@
 ---
 # vars file for web
-
+template_name: index.html.j2
+template_message: "This is a sample template message."
 package_name: nginx
 files: 
   - 1.txt

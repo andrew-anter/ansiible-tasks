@@ -11,5 +11,10 @@
   apt:
     name: "{{ package_name }}"
     state: latest
-  
   notify: Copy Files Handler
+
+- name: render template
+  template:
+    src: "roles/web/templates/{{ template_name }}"
+    dest: "/var/www/html/index.html"
+  notify: Restart Nginx Handler

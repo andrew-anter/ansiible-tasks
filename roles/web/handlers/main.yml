@@ -1,6 +1,5 @@
 ---
 # handlers file for web
-
 - name: Copy Files Handler
   copy:
     src: "roles/web/files/{{ item }}"
